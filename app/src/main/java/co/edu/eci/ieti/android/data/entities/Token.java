@@ -1,4 +1,4 @@
-package co.edu.eci.ieti.android.network.data;
+package co.edu.eci.ieti.android.data.entities;
 
 /**
  * @author Camilo Velandia

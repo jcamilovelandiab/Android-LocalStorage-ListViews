@@ -3,7 +3,7 @@ package co.edu.eci.ieti.android.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import co.edu.eci.ieti.R;
-import co.edu.eci.ieti.android.network.data.Token;
+import co.edu.eci.ieti.android.data.entities.Token;
 
 /**
  * @author Santiago Carrillo

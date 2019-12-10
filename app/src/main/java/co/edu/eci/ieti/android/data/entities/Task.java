@@ -1,6 +1,4 @@
-package co.edu.eci.ieti.android.network.data;
-
-import java.io.Serializable;
+package co.edu.eci.ieti.android.data.entities;
 
 
 public class Task {
@@ -10,18 +8,16 @@ public class Task {
     String status;
     String dueDate;
     String description;
-    User responsible;
 
     public Task() {
     }
 
-    public Task(String _id, String title, String status, String dueDate, String description, User responsible) {
+    public Task(String _id, String title, String status, String dueDate, String description) {
         this._id = _id;
         this.title = title;
         this.status = status;
         this.dueDate = dueDate;
         this.description = description;
-        this.responsible = responsible;
     }
 
     public String get_id() {
@@ -64,14 +60,6 @@ public class Task {
         this.description = description;
     }
 
-    public User getResponsible() {
-        return responsible;
-    }
-
-    public void setResponsible(User responsible) {
-        this.responsible = responsible;
-    }
-
     @Override
     public String toString() {
         return "Task{" +
@@ -80,7 +68,6 @@ public class Task {
                 ", status='" + status + '\'' +
                 ", dueDate='" + dueDate + '\'' +
                 ", description='" + description + '\'' +
-                ", responsible=" + responsible +
                 '}';
     }
 

@@ -1,14 +1,12 @@
-package co.edu.eci.ieti.android.network.data;
+package co.edu.eci.ieti.android.data.entities;
 
 /**
  * @author Santiago Carrillo
  * 4/23/19.
  */
-public class LoginWrapper
-{
+public class LoginWrapper{
 
     final String email;
-
     final String password;
 
     public LoginWrapper( String email, String password )

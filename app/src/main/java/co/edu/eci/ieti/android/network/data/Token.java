@@ -1,16 +1,13 @@
 package co.edu.eci.ieti.android.network.data;
 
 /**
- * @author Santiago Carrillo
- * 4/23/19.
+ * @author Camilo Velandia
  */
 public class Token
 {
     String accessToken;
 
-    public Token()
-    {
-    }
+    public Token(){}
 
     public String getAccessToken()
     {
@@ -21,4 +18,11 @@ public class Token
     {
         this.accessToken = accessToken;
     }
+
+    @Override
+    public String toString(){
+        return "Token[accessToken="+accessToken+"]";
+    }
+
 }
+

@@ -11,10 +11,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import co.edu.eci.ieti.R;
+import co.edu.eci.ieti.android.network.RetrofitNetwork;
+import co.edu.eci.ieti.android.network.data.Task;
+import co.edu.eci.ieti.android.network.data.Token;
 import co.edu.eci.ieti.android.storage.Storage;
+import retrofit2.Call;
+import retrofit2.Response;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity
     extends AppCompatActivity
@@ -29,6 +40,7 @@ public class MainActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
         storage = new Storage( this );
+
         Toolbar toolbar = findViewById( R.id.toolbar );
         setSupportActionBar( toolbar );
 
@@ -55,15 +67,11 @@ public class MainActivity
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed(){
         DrawerLayout drawer = findViewById( R.id.drawer_layout );
-        if ( drawer.isDrawerOpen( GravityCompat.START ) )
-        {
+        if ( drawer.isDrawerOpen( GravityCompat.START ) ){
             drawer.closeDrawer( GravityCompat.START );
-        }
-        else
-        {
+        }else{
             super.onBackPressed();
         }
     }

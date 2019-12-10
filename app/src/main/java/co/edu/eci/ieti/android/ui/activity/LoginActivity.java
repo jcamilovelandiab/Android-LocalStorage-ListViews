@@ -20,22 +20,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class LoginActivity
-    extends AppCompatActivity
-{
+    extends AppCompatActivity{
 
     private final ExecutorService executorService = Executors.newFixedThreadPool( 1 );
-
     private final RetrofitNetwork retrofitNetwork = new RetrofitNetwork();
-
     private Storage storage;
-
     private EditText email;
-
     private EditText password;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState )
-    {
+    protected void onCreate( Bundle savedInstanceState ){
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_login );
         storage = new Storage( this );
@@ -44,36 +38,27 @@ public class LoginActivity
     }
 
 
-    public void onLoginClicked( final View view )
-    {
+    public void onLoginClicked( final View view ){
         final LoginWrapper loginWrapper = validInputFields();
-        if ( loginWrapper != null )
-        {
+        if ( loginWrapper != null ){
             view.setEnabled( false );
             executorService.execute( new Runnable()
             {
                 @Override
                 public void run()
                 {
-                    try
-                    {
+                    try{
                         Call<Token> call = retrofitNetwork.getAuthService().login( loginWrapper );
                         Response<Token> response = call.execute();
-                        if ( response.isSuccessful() )
-                        {
+                        if ( response.isSuccessful() ){
                             Token token = response.body();
                             storage.saveToken( token );
                             startActivity( new Intent( LoginActivity.this, MainActivity.class ) );
-                            finish();
-                        }
-                        else
-                        {
+                            finish();}
+                        else{
                             showErrorMessage( view );
                         }
-
-                    }
-                    catch ( IOException e )
-                    {
+                    }catch ( IOException e ){
                         e.printStackTrace();
                         showErrorMessage( view );
                     }
@@ -82,8 +67,7 @@ public class LoginActivity
         }
     }
 
-    private void showErrorMessage( final View view )
-    {
+    private void showErrorMessage( final View view ){
         runOnUiThread( new Runnable()
         {
             @Override
@@ -93,32 +77,23 @@ public class LoginActivity
                 Snackbar.make( view, getString( R.string.server_error_message ), Snackbar.LENGTH_LONG );
             }
         } );
-
     }
 
-    private LoginWrapper validInputFields()
-    {
+    private LoginWrapper validInputFields(){
         String email = this.email.getText().toString();
         String password = this.password.getText().toString();
-        if ( !StringUtils.isValidEmail( email ) )
-        {
+        if ( !StringUtils.isValidEmail( email ) ){
             this.email.setError( getString( R.string.invalid_email ) );
             return null;
-        }
-        else
-        {
+        }else{
             this.email.setError( null );
-            if ( password.isEmpty() )
-            {
+            if ( password.isEmpty() ){
                 this.password.setError( getString( R.string.please_enter_a_password ) );
                 return null;
-            }
-            else
-            {
+            }else{
                 this.password.setError( null );
             }
         }
-
         return new LoginWrapper( email, password );
     }
 }
